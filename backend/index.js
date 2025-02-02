@@ -18,20 +18,23 @@ app.listen(port, (error) => {
   console.log(`Server running on port ${port}`);
 });
 
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
+
 app.post("/upload", async (req, res) => {
   const formData = new FormData();
-  form.append("image", req.body.file);
+  formData.append("image_base64", req.body.image_base64);
 
   (async () => {
     try {
       const response = await got.post("https://api.imagga.com/v2/tags", {
         body: formData,
-        username: apiKey,
-        password: apiSecret,
+        username: api_key,
+        password: api_secret,
       });
-      console.log(response.body);
     } catch (error) {
-      console.log(error.response.body);
+      console.log(error);
     }
   })();
 });

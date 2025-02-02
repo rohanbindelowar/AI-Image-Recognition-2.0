@@ -10,12 +10,19 @@ const Input = () => {
       method: "post",
       url: "http://localhost:3001/upload",
       data: {
-        file: document.getElementById("file").src,
+        image_base64: document.getElementById("previewImg").src,
       },
     };
     axios(config)
       .then((response) => {
-        console.log(response.data);
+        const tagsData = [];
+        for(i=0;i<response.data.result.tags.length;i++){
+          if(response.data.result.tags[i].confidence>80){
+            tagsData.push(response.data.result.tags[i]);
+          }
+        }
+        props.setTags(tagsData);
+        document.getElementById("run").style.display = "none";
       })
       .catch((error) => {
         console.log(error);
@@ -49,7 +56,6 @@ const Input = () => {
         <input
           type="file"
           id="file"
-          accept="image/*"
           style={{ display: "none" }}
           onChange={handleChange}
         />
