@@ -1,0 +1,10 @@
+.tags{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.labels{
+    background: gray;
+    color: white;
+}

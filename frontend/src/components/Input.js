@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Input.css";
 import axios from "axios";
 
-const Input = () => {
+const Input = (props) => {
   const handleClick = () => {
     document.getElementById("run").innerText = "Processing...";
 
@@ -16,7 +16,7 @@ const Input = () => {
     axios(config)
       .then((response) => {
         const tagsData = [];
-        for(i=0;i<response.data.result.tags.length;i++){
+        for( let i=0;i<response.data.result.tags.length;i++){
           if(response.data.result.tags[i].confidence>80){
             tagsData.push(response.data.result.tags[i]);
           }
